@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Log in or create your StudyHub account to access collaborative study tools.">
+    <title>StudyHub – Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo">
+            <div class="nav-logo-icon">📚</div>
+            <span>StudyHub</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">← Back to Home</a></li>
+        </ul>
+    </nav>
+
+    <div class="auth-container">
+        <div class="auth-card card">
+            <div class="auth-header">
+                <h2 id="auth-title">Welcome Back</h2>
+                <p id="auth-subtitle">Log in to continue studying</p>
+            </div>
+
+            <!-- Auth Tabs -->
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="tab-login" onclick="switchTab('login')">Log In</button>
+                <button class="auth-tab" id="tab-signup" onclick="switchTab('signup')">Sign Up</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" class="input-field" placeholder="you@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" class="input-field" placeholder="Enter password"
+                        required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px;" id="login-btn">
+                    Log In
+                </button>
+            </form>
+
+            <!-- Signup Form -->
+            <form id="signup-form" style="display:none;" onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label for="signup-username">Username</label>
+                    <input type="text" id="signup-username" class="input-field" placeholder="Choose a username" required
+                        minlength="3">
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" class="input-field" placeholder="you@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" class="input-field" placeholder="Min 6 characters"
+                        required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm">Confirm Password</label>
+                    <input type="password" id="signup-confirm" class="input-field" placeholder="Repeat password"
+                        required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px;" id="signup-btn">
+                    Create Account 🚀
+                </button>
+            </form>
+
+            <!-- Messages -->
+            <div class="form-error" id="form-error"></div>
+            <div class="form-success" id="form-success"></div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        // API base path (relative to XAMPP)
+        var API_BASE = '../api';
+
+        // Check if coming from signup link
+        if (window.location.hash === '#signup') {
+            switchTab('signup');
+        }
+
+        // Redirect if already logged in
+        if (localStorage.getItem('studyhub_token')) {
+            window.location.href = 'dashboard.html';
+        }
+
+        function switchTab(tab) {
+            hideMessages();
+            if (tab === 'login') {
+                $('#login-form').show();
+                $('#signup-form').hide();
+                $('#tab-login').addClass('active');
+                $('#tab-signup').removeClass('active');
+                $('#auth-title').text('Welcome Back');
+                $('#auth-subtitle').text('Log in to continue studying');
+            } else {
+                $('#login-form').hide();
+                $('#signup-form').show();
+                $('#tab-login').removeClass('active');
+                $('#tab-signup').addClass('active');
+                $('#auth-title').text('Create Account');
+                $('#auth-subtitle').text('Join StudyHub and start learning');
+            }
+        }
+
+        function showError(msg) {
+            $('#form-error').text(msg).show();
+            $('#form-success').hide();
+        }
+
+        function showSuccess(msg) {
+            $('#form-success').text(msg).show();
+            $('#form-error').hide();
+        }
+
+        function hideMessages() {
+            $('#form-error').hide();
+            $('#form-success').hide();
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            hideMessages();
+
+            var email = $('#login-email').val();
+            var password = $('#login-password').val();
+            var $btn = $('#login-btn');
+
+            $btn.html('<span class="spinner"></span> Logging in...').prop('disabled', true);
+
+            $.ajax({
+                url: API_BASE + '/auth.php?action=login',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ email: email, password: password }),
+                success: function (data) {
+                    localStorage.setItem('studyhub_token', data.token);
+                    localStorage.setItem('studyhub_user', JSON.stringify(data.user));
+                    showSuccess('Login successful! Redirecting...');
+                    setTimeout(function () {
+                        window.location.href = 'dashboard.html';
+                    }, 800);
+                },
+                error: function (xhr) {
+                    var resp = xhr.responseJSON || {};
+                    showError(resp.error || 'Login failed');
+                },
+                complete: function () {
+                    $btn.html('Log In').prop('disabled', false);
+                }
+            });
+        }
+
+        function handleSignup(e) {
+            e.preventDefault();
+            hideMessages();
+
+            var username = $('#signup-username').val();
+            var email = $('#signup-email').val();
+            var password = $('#signup-password').val();
+            var confirm = $('#signup-confirm').val();
+            var $btn = $('#signup-btn');
+
+            if (password !== confirm) {
+                showError('Passwords do not match');
+                return;
+            }
+
+            $btn.html('<span class="spinner"></span> Creating account...').prop('disabled', true);
+
+            $.ajax({
+                url: API_BASE + '/auth.php?action=signup',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ username: username, email: email, password: password }),
+                success: function (data) {
+                    localStorage.setItem('studyhub_token', data.token);
+                    localStorage.setItem('studyhub_user', JSON.stringify(data.user));
+                    showSuccess('Account created! Redirecting to dashboard...');
+                    setTimeout(function () {
+                        window.location.href = 'dashboard.html';
+                    }, 800);
+                },
+                error: function (xhr) {
+                    var resp = xhr.responseJSON || {};
+                    showError(resp.error || 'Signup failed');
+                },
+                complete: function () {
+                    $btn.html('Create Account 🚀').prop('disabled', false);
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1370 @@
+/* ==========================================
+   StudyHub CSS Styles
+   Made by a student for students
+   ========================================== */
+
+/* bring in a nice font from google */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+
+/* ==========================================
+   RESET - clear default browser styles
+   ========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0a0a1a;
+    color: #f0f0ff;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+}
+
+input {
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    border: none;
+}
+
+textarea {
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    border: none;
+}
+
+select {
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    border: none;
+}
+
+
+/* ==========================================
+   SCROLLBAR - make it purple
+   ========================================== */
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #6C63FF;
+    border-radius: 3px;
+}
+
+
+/* ==========================================
+   ANIMATIONS - just a simple fade in
+   ========================================== */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+/* ==========================================
+   GLASS CARD - used in many places
+   ========================================== */
+
+.glass {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.card {
+    background-color: rgba(25, 25, 60, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+
+/* ==========================================
+   BUTTONS - all the different button styles
+   ========================================== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+/* primary button - purple */
+.btn-primary {
+    background-color: #6C63FF;
+    color: white;
+    box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(108, 99, 255, 0.5);
+}
+
+/* secondary button - transparent with border */
+.btn-secondary {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #f0f0ff;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #6C63FF;
+}
+
+/* accent button - pinkish */
+.btn-accent {
+    background-color: #FF6584;
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 101, 132, 0.3);
+}
+
+.btn-accent:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(255, 101, 132, 0.5);
+}
+
+/* danger button - red */
+.btn-danger {
+    background-color: rgba(255, 70, 70, 0.2);
+    border: 1px solid rgba(255, 70, 70, 0.3);
+    color: #ff6666;
+}
+
+.btn-danger:hover {
+    background-color: rgba(255, 70, 70, 0.3);
+}
+
+/* small button */
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+}
+
+/* icon-only button */
+.btn-icon {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 8px;
+}
+
+
+/* ==========================================
+   INPUT FIELDS - text inputs, textareas, selects
+   ========================================== */
+
+.input-field {
+    width: 100%;
+    padding: 14px 18px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    color: #f0f0ff;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.input-field:focus {
+    border-color: #6C63FF;
+    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.input-field::placeholder {
+    color: #6a6a8a;
+}
+
+/* FIX: make dropdown options readable on dark background */
+select.input-field option {
+    background-color: #1a1a3e;
+    color: #f0f0ff;
+    padding: 8px;
+}
+
+
+/* ==========================================
+   BADGES - small colored labels
+   ========================================== */
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-primary {
+    background-color: rgba(108, 99, 255, 0.2);
+    color: #6C63FF;
+}
+
+.badge-green {
+    background-color: rgba(67, 233, 123, 0.2);
+    color: #43E97B;
+}
+
+.badge-orange {
+    background-color: rgba(247, 151, 30, 0.2);
+    color: #F7971E;
+}
+
+.badge-red {
+    background-color: rgba(255, 101, 132, 0.2);
+    color: #FF6584;
+}
+
+
+/* ==========================================
+   NAVIGATION BAR - top bar on landing/login
+   ========================================== */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(10, 10, 26, 0.9);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* the logo in the navbar */
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+
+.nav-logo span {
+    color: #6C63FF;
+}
+
+/* the little icon box next to the logo text */
+.nav-logo-icon {
+    width: 36px;
+    height: 36px;
+    background-color: #6C63FF;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+/* links in the navbar */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    list-style: none;
+}
+
+.nav-links a {
+    padding: 8px 16px;
+    border-radius: 8px;
+    color: #a0a0c0;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #f0f0ff;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.nav-links a.active {
+    color: #6C63FF;
+    background-color: rgba(108, 99, 255, 0.1);
+}
+
+
+/* ==========================================
+   HERO SECTION - big landing page area
+   ========================================== */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 40px 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 800px;
+    position: relative;
+    z-index: 1;
+    animation: fadeInUp 0.8s ease;
+}
+
+/* the little badge that says "Collaborative Study Platform" */
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    background-color: rgba(108, 99, 255, 0.15);
+    border: 1px solid rgba(108, 99, 255, 0.3);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    color: #6C63FF;
+    font-weight: 500;
+    margin-bottom: 24px;
+}
+
+/* the big title */
+.hero h1 {
+    font-size: 3.8rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+}
+
+/* the highlighted word in the title */
+.hero h1 .highlight {
+    color: #6C63FF;
+}
+
+/* paragraph under the title */
+.hero p {
+    font-size: 1.2rem;
+    color: #a0a0c0;
+    max-width: 600px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+}
+
+/* the two buttons under the paragraph */
+.hero-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+/* the stats under the buttons */
+.hero-stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    margin-top: 60px;
+    animation: fadeInUp 0.8s ease 0.3s both;
+}
+
+.hero-stat {
+    text-align: center;
+}
+
+.hero-stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #6C63FF;
+}
+
+.hero-stat-label {
+    font-size: 0.85rem;
+    color: #6a6a8a;
+    margin-top: 4px;
+}
+
+
+/* ==========================================
+   FEATURES SECTION - feature cards grid
+   ========================================== */
+
+.features {
+    padding: 100px 40px;
+    position: relative;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.section-header h2 .highlight {
+    color: #6C63FF;
+}
+
+.section-header p {
+    font-size: 1.1rem;
+    color: #a0a0c0;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* the grid that holds feature cards */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* each feature card */
+.feature-card {
+    padding: 32px;
+    border-radius: 16px;
+    background-color: rgba(25, 25, 60, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.6s ease both;
+}
+
+/* stagger the fade-in a little for each card */
+.feature-card:nth-child(1) { animation-delay: 0.1s; }
+.feature-card:nth-child(2) { animation-delay: 0.2s; }
+.feature-card:nth-child(3) { animation-delay: 0.3s; }
+.feature-card:nth-child(4) { animation-delay: 0.4s; }
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(108, 99, 255, 0.3);
+    box-shadow: 0 0 30px rgba(108, 99, 255, 0.15);
+}
+
+/* the icon box inside each feature card */
+.feature-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+}
+
+/* different colors for the icon backgrounds */
+.feature-icon.purple {
+    background-color: rgba(108, 99, 255, 0.15);
+}
+
+.feature-icon.pink {
+    background-color: rgba(255, 101, 132, 0.15);
+}
+
+.feature-icon.green {
+    background-color: rgba(67, 233, 123, 0.15);
+}
+
+.feature-icon.orange {
+    background-color: rgba(247, 151, 30, 0.15);
+}
+
+.feature-icon.cyan {
+    background-color: rgba(0, 210, 255, 0.15);
+}
+
+.feature-icon.lavender {
+    background-color: rgba(161, 140, 209, 0.15);
+}
+
+/* title and text inside feature card */
+.feature-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    font-size: 0.9rem;
+    color: #a0a0c0;
+    line-height: 1.6;
+}
+
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+
+.footer {
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: #6a6a8a;
+    font-size: 0.85rem;
+}
+
+
+/* ==========================================
+   AUTH PAGE - login and signup
+   ========================================== */
+
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 440px;
+    padding: 40px;
+    animation: fadeInUp 0.6s ease;
+}
+
+/* the header area with title and subtitle */
+.auth-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.auth-header h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.auth-header p {
+    color: #a0a0c0;
+    font-size: 0.95rem;
+}
+
+/* the login/signup tab buttons */
+.auth-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 28px;
+    background-color: rgba(255, 255, 255, 0.03);
+    padding: 4px;
+    border-radius: 12px;
+}
+
+.auth-tab {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: transparent;
+    color: #a0a0c0;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.auth-tab.active {
+    background-color: #6C63FF;
+    color: white;
+}
+
+/* form groups */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #a0a0c0;
+}
+
+/* error message box */
+.form-error {
+    display: none;
+    margin-top: 12px;
+    padding: 12px 16px;
+    background-color: rgba(255, 70, 70, 0.1);
+    border: 1px solid rgba(255, 70, 70, 0.3);
+    border-radius: 8px;
+    color: #ff6666;
+    font-size: 0.85rem;
+}
+
+/* success message box */
+.form-success {
+    display: none;
+    margin-top: 12px;
+    padding: 12px 16px;
+    background-color: rgba(67, 233, 123, 0.1);
+    border: 1px solid rgba(67, 233, 123, 0.3);
+    border-radius: 8px;
+    color: #43E97B;
+    font-size: 0.85rem;
+}
+
+
+/* ==========================================
+   DASHBOARD LAYOUT - sidebar + main area
+   ========================================== */
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+    padding-top: 0;
+}
+
+
+/* ==========================================
+   SIDEBAR - left navigation menu
+   ========================================== */
+
+.sidebar {
+    width: 260px;
+    min-height: 100vh;
+    background-color: rgba(10, 10, 26, 0.95);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 20px 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+/* the logo at the top of the sidebar */
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 20px 24px;
+    font-size: 1.3rem;
+    font-weight: 800;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 16px;
+}
+
+.sidebar-logo span {
+    color: #6C63FF;
+}
+
+/* sections inside the sidebar */
+.sidebar-section {
+    padding: 8px 12px;
+}
+
+/* the small title above section items like "Main" */
+.sidebar-section-title {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #6a6a8a;
+    padding: 0 8px;
+    margin-bottom: 8px;
+}
+
+/* each clickable item in sidebar */
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    color: #a0a0c0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-bottom: 2px;
+}
+
+.sidebar-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #f0f0ff;
+}
+
+.sidebar-item.active {
+    background-color: rgba(108, 99, 255, 0.15);
+    color: #6C63FF;
+}
+
+.sidebar-item .icon {
+    font-size: 1.1rem;
+    width: 24px;
+    text-align: center;
+}
+
+/* user info at the bottom of sidebar */
+.sidebar-user {
+    margin-top: auto;
+    padding: 16px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* the little circle avatar */
+.sidebar-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: white;
+}
+
+.sidebar-user-info {
+    flex: 1;
+}
+
+.sidebar-user-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.sidebar-user-email {
+    font-size: 0.75rem;
+    color: #6a6a8a;
+}
+
+
+/* ==========================================
+   MAIN CONTENT AREA - right side of dashboard
+   ========================================== */
+
+.main-content {
+    flex: 1;
+    margin-left: 260px;
+    padding: 24px;
+    min-height: 100vh;
+}
+
+
+/* ==========================================
+   PANELS - the different tab sections
+   ========================================== */
+
+/* by default all panels are hidden */
+.panel {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+/* show the active panel */
+.panel.active {
+    display: block;
+}
+
+/* header at the top of each panel */
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.panel-header h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+
+/* ==========================================
+   STUDY CHAT PANEL
+   ========================================== */
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 120px);
+}
+
+/* the room selector bar at top */
+.chat-room-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+/* each room button */
+.chat-room-btn {
+    padding: 8px 16px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #a0a0c0;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.chat-room-btn.active {
+    background-color: rgba(108, 99, 255, 0.15);
+    border-color: #6C63FF;
+    color: #6C63FF;
+}
+
+.chat-room-btn:hover {
+    background-color: rgba(108, 99, 255, 0.15);
+    border-color: #6C63FF;
+    color: #6C63FF;
+}
+
+/* the messages area */
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    border-radius: 16px;
+    background-color: rgba(25, 25, 60, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* a single chat message */
+.chat-message {
+    display: flex;
+    gap: 10px;
+    animation: fadeInUp 0.3s ease;
+}
+
+/* the avatar circle */
+.chat-message-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+}
+
+/* message content area */
+.chat-message-content {
+    flex: 1;
+}
+
+/* name + time row */
+.chat-message-header {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 2px;
+}
+
+.chat-message-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.chat-message-time {
+    font-size: 0.7rem;
+    color: #6a6a8a;
+}
+
+/* the actual message text */
+.chat-message-text {
+    font-size: 0.9rem;
+    color: #a0a0c0;
+    line-height: 1.5;
+}
+
+/* the input area at the bottom */
+.chat-input-area {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.chat-input-area input {
+    flex: 1;
+}
+
+
+/* ==========================================
+   TASK MANAGER PANEL
+   ========================================== */
+
+/* filter buttons row */
+.task-controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.task-filter-btn {
+    padding: 6px 14px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #a0a0c0;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.task-filter-btn.active {
+    background-color: rgba(108, 99, 255, 0.15);
+    border-color: #6C63FF;
+    color: #6C63FF;
+}
+
+/* the list of tasks */
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* a single task item */
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    border-radius: 12px;
+    background-color: rgba(25, 25, 60, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.3s ease;
+}
+
+.task-item:hover {
+    border-color: rgba(108, 99, 255, 0.2);
+}
+
+/* the checkbox circle */
+.task-checkbox {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 2px solid #6a6a8a;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.task-checkbox.checked {
+    background-color: #43E97B;
+    border-color: #43E97B;
+}
+
+.task-checkbox.checked::after {
+    content: '✓';
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+/* task info area */
+.task-info {
+    flex: 1;
+}
+
+.task-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.task-meta {
+    display: flex;
+    gap: 12px;
+    font-size: 0.75rem;
+    color: #6a6a8a;
+}
+
+/* buttons on the right side of a task */
+.task-actions {
+    display: flex;
+    gap: 6px;
+}
+
+/* the add task form */
+.add-task-form {
+    display: none;
+    padding: 24px;
+    margin-bottom: 20px;
+    border-radius: 16px;
+    background-color: rgba(25, 25, 60, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    animation: fadeInUp 0.3s ease;
+}
+
+.add-task-form.show {
+    display: block;
+}
+
+/* the two-column row for date + priority */
+.add-task-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+
+/* ==========================================
+   POMODORO TIMER PANEL
+   ========================================== */
+
+.pomodoro-container {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* the work/break tab buttons */
+.pomodoro-tabs {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.pomodoro-tab {
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #a0a0c0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pomodoro-tab.active {
+    background-color: #6C63FF;
+    border-color: transparent;
+    color: white;
+}
+
+/* the timer display area */
+.pomodoro-display {
+    margin-bottom: 40px;
+}
+
+/* the circle around the timer */
+.pomodoro-circle {
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background-color: rgba(25, 25, 60, 0.6);
+    border: 3px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* when the timer is running, make the border purple */
+.pomodoro-circle.running {
+    border-color: #6C63FF;
+    box-shadow: 0 0 30px rgba(108, 99, 255, 0.4);
+}
+
+/* the big time numbers */
+.pomodoro-time {
+    font-size: 3.5rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+/* the label under the time */
+.pomodoro-label {
+    font-size: 0.85rem;
+    color: #6a6a8a;
+    margin-top: 4px;
+}
+
+/* start/pause/reset buttons */
+.pomodoro-controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+/* stats grid */
+.pomodoro-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.pomo-stat-card {
+    padding: 16px;
+    border-radius: 12px;
+    background-color: rgba(25, 25, 60, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pomo-stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #6C63FF;
+}
+
+.pomo-stat-label {
+    font-size: 0.75rem;
+    color: #6a6a8a;
+    margin-top: 4px;
+}
+
+
+/* ==========================================
+   LOADING SPINNER
+   ========================================== */
+
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-top-color: #6C63FF;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* typing dots animation */
+.typing-indicator {
+    display: flex;
+    gap: 4px;
+    padding: 8px 16px;
+}
+
+.typing-indicator span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #6C63FF;
+    animation: pulse 1.5s infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+
+/* ==========================================
+   MODAL - popup dialogs
+   ========================================== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.modal {
+    width: 90%;
+    max-width: 480px;
+    padding: 32px;
+    border-radius: 16px;
+    background-color: #111128;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 0.3s ease;
+}
+
+.modal h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+
+/* ==========================================
+   RESPONSIVE - make it work on smaller screens
+   ========================================== */
+
+/* tablets */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 12px 20px;
+    }
+
+    .hero h1 {
+        font-size: 2.4rem;
+    }
+
+    .hero-stats {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* make sidebar smaller */
+    .sidebar {
+        width: 70px;
+        overflow: visible;
+    }
+
+    /* hide text, only show icons */
+    .sidebar-logo span {
+        display: none;
+    }
+
+    .sidebar-section-title {
+        display: none;
+    }
+
+    .sidebar-item span:not(.icon) {
+        display: none;
+    }
+
+    .sidebar-user-info {
+        display: none;
+    }
+
+    .sidebar-item {
+        justify-content: center;
+        padding: 12px;
+    }
+
+    .main-content {
+        margin-left: 70px;
+    }
+
+    .pomodoro-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* phones */
+@media (max-width: 480px) {
+    .hero {
+        padding: 100px 20px 60px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .auth-card {
+        padding: 24px;
+    }
+}

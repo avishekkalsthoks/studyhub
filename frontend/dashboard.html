@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="StudyHub Dashboard - Manage your studies with collaborative tools.">
+    <title>StudyHub – Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+</head>
+
+<body>
+
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-logo">
+                <div class="nav-logo-icon">📚</div>
+                <span>StudyHub</span>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Main</div>
+                <div class="sidebar-item active" onclick="switchPanel('chat')" id="nav-chat">
+                    <span class="icon">💬</span>
+                    <span>Study Chat</span>
+                </div>
+                <div class="sidebar-item" onclick="switchPanel('tasks')" id="nav-tasks">
+                    <span class="icon">✅</span>
+                    <span>Task Manager</span>
+                </div>
+                <div class="sidebar-item" onclick="switchPanel('common')" id="nav-common">
+                    <span class="icon">📢</span>
+                    <span>Common Tasks</span>
+                </div>
+                <div class="sidebar-item" onclick="switchPanel('pomodoro')" id="nav-pomodoro">
+                    <span class="icon">⏱️</span>
+                    <span>Pomodoro</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Community</div>
+                <div class="sidebar-item" onclick="switchPanel('resources')" id="nav-resources">
+                    <span class="icon">📁</span>
+                    <span>Resources</span>
+                </div>
+            </div>
+
+            <div class="sidebar-user" id="sidebar-user">
+                <div class="sidebar-avatar" id="user-avatar">?</div>
+                <div class="sidebar-user-info">
+                    <div class="sidebar-user-name" id="user-display-name">Loading...</div>
+                    <div class="sidebar-user-email" id="user-display-email">...</div>
+                </div>
+                <button class="btn-icon btn-secondary" onclick="logout()" title="Log out"
+                    style="font-size:0.8rem;">🚪</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- ========== Study Chat Panel ========== -->
+            <div class="panel active" id="panel-chat">
+                <div class="panel-header">
+                    <h2>💬 Study Chat</h2>
+                    <span class="badge badge-primary" id="chat-room-label"># general</span>
+                </div>
+                <div class="chat-room-bar">
+                    <button class="chat-room-btn active" onclick="switchRoom('general')"># general</button>
+                    <button class="chat-room-btn" onclick="switchRoom('math')"># math</button>
+                    <button class="chat-room-btn" onclick="switchRoom('science')"># science</button>
+                    <button class="chat-room-btn" onclick="switchRoom('programming')"># programming</button>
+                    <button class="chat-room-btn" onclick="switchRoom('exam-prep')"># exam-prep</button>
+                </div>
+                <div class="chat-container">
+                    <div class="chat-messages" id="chat-messages">
+                        <div style="text-align:center; color:#6a6a8a; padding:40px; font-size:0.9rem;">
+                            Welcome to <strong>#general</strong>! Start the conversation 🎉
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" class="input-field" id="chat-input" placeholder="Type a message..."
+                            onkeydown="if(event.key==='Enter')sendMessage()">
+                        <button class="btn btn-primary" onclick="sendMessage()" id="chat-send-btn">Send</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== Task Manager Panel ========== -->
+            <div class="panel" id="panel-tasks">
+                <div class="panel-header">
+                    <h2>✅ Task Manager</h2>
+                    <button class="btn btn-primary btn-sm" onclick="toggleAddTask()" id="add-task-toggle">+ Add
+                        Task</button>
+                </div>
+
+                <!-- Add Task Form -->
+                <div class="add-task-form" id="add-task-form">
+                    <h3 style="margin-bottom:16px;">New Task</h3>
+                    <div class="form-group">
+                        <input type="text" class="input-field" id="task-title-input" placeholder="Task title...">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="input-field" id="task-desc-input" placeholder="Description (optional)"
+                            rows="2"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label style="font-size:0.8rem; color:#6a6a8a; margin-bottom:4px;">Due
+                                Date</label>
+                            <input type="date" class="input-field" id="task-date-input">
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size:0.8rem; color:#6a6a8a; margin-bottom:4px;">Priority</label>
+                            <select class="input-field" id="task-priority-input">
+                                <option value="low">Low</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:8px;">
+                        <button class="btn btn-primary btn-sm" onclick="addTask()">Add Task</button>
+                        <button class="btn btn-secondary btn-sm" onclick="toggleAddTask()">Cancel</button>
+                    </div>
+                </div>
+
+                <!-- Task Filters -->
+                <div class="task-controls">
+                    <button class="task-filter-btn active" onclick="filterTasks('all', this)">All</button>
+                    <button class="task-filter-btn" onclick="filterTasks('pending', this)">Pending</button>
+                    <button class="task-filter-btn" onclick="filterTasks('in_progress', this)">In Progress</button>
+                    <button class="task-filter-btn" onclick="filterTasks('completed', this)">Completed</button>
+                </div>
+
+                <!-- Task List -->
+                <div class="task-list" id="task-list">
+                    <div style="text-align:center; color:#6a6a8a; padding:40px;">
+                        No tasks yet. Click "+ Add Task" to get started! 📝
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== Common Tasks Panel ========== -->
+            <div class="panel" id="panel-common">
+                <div class="panel-header">
+                    <h2>📢 Common Tasks</h2>
+                    <button class="btn btn-primary btn-sm" onclick="toggleAddCommonTask()" id="add-common-toggle">+ Add
+                        Shared Task</button>
+                </div>
+
+                <!-- Add Common Task Form -->
+                <div class="add-task-form" id="add-common-form">
+                    <h3 style="margin-bottom:16px;">New Shared Task</h3>
+                    <div class="form-group">
+                        <input type="text" class="input-field" id="common-title-input"
+                            placeholder="Assignment title...">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="input-field" id="common-desc-input"
+                            placeholder="Links or instructions (optional)" rows="2"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label style="font-size:0.8rem; color:#6a6a8a; margin-bottom:4px;">Due Date</label>
+                            <input type="date" class="input-field" id="common-date-input">
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size:0.8rem; color:#6a6a8a; margin-bottom:4px;">Priority</label>
+                            <select class="input-field" id="common-priority-input">
+                                <option value="low">Low</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:8px;">
+                        <button class="btn btn-primary btn-sm" onclick="addCommonTask()">Post Task</button>
+                        <button class="btn btn-secondary btn-sm" onclick="toggleAddCommonTask()">Cancel</button>
+                    </div>
+                </div>
+
+                <!-- Common Task List -->
+                <div class="task-list" id="common-task-list">
+                    <div style="text-align:center; color:#6a6a8a; padding:40px;">
+                        No common tasks yet. Be the first to post! 📢
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== Pomodoro Timer Panel ========== -->
+            <div class="panel" id="panel-pomodoro">
+                <div class="panel-header">
+                    <h2>⏱️ Pomodoro Timer</h2>
+                </div>
+
+                <div class="pomodoro-container">
+                    <div class="pomodoro-tabs">
+                        <button class="pomodoro-tab active" onclick="setPomodoro('work', 25, this)">Focus</button>
+                        <button class="pomodoro-tab" onclick="setPomodoro('short_break', 5, this)">Short Break</button>
+                        <button class="pomodoro-tab" onclick="setPomodoro('long_break', 15, this)">Long Break</button>
+                    </div>
+
+                    <div class="pomodoro-display">
+                        <div class="pomodoro-circle" id="pomo-circle">
+                            <div class="pomodoro-time" id="pomo-time">25:00</div>
+                            <div class="pomodoro-label" id="pomo-label">Focus Session</div>
+                        </div>
+                    </div>
+
+                    <div class="pomodoro-controls">
+                        <button class="btn btn-primary" onclick="togglePomodoro()" id="pomo-toggle-btn">▶ Start</button>
+                        <button class="btn btn-secondary" onclick="resetPomodoro()">↺ Reset</button>
+                    </div>
+
+                    <div class="pomodoro-stats">
+                        <div class="pomo-stat-card">
+                            <div class="pomo-stat-value" id="pomo-today-sessions">0</div>
+                            <div class="pomo-stat-label">Today's Sessions</div>
+                        </div>
+                        <div class="pomo-stat-card">
+                            <div class="pomo-stat-value" id="pomo-today-minutes">0</div>
+                            <div class="pomo-stat-label">Minutes Today</div>
+                        </div>
+                        <div class="pomo-stat-card">
+                            <div class="pomo-stat-value" id="pomo-total-sessions">0</div>
+                            <div class="pomo-stat-label">Total Sessions</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== Resources Panel ========== -->
+            <div class="panel" id="panel-resources">
+                <div class="panel-header">
+                    <h2>📁 Shared Resources</h2>
+                    <button class="btn btn-primary btn-sm" onclick="toggleUploadForm()" id="upload-toggle-btn">+ Upload
+                        Resource</button>
+                </div>
+
+                <!-- Upload Form -->
+                <div class="add-task-form" id="upload-form">
+                    <h3 style="margin-bottom:16px;">Upload Resource</h3>
+                    <div class="form-group">
+                        <input type="text" class="input-field" id="resource-title-input"
+                            placeholder="Resource title...">
+                    </div>
+                    <div class="form-group">
+                        <select class="input-field" id="resource-category-input">
+                            <option value="general">General</option>
+                            <option value="notes">Notes</option>
+                            <option value="textbook">Textbook</option>
+                            <option value="assignment">Assignment</option>
+                            <option value="presentation">Presentation</option>
+                            <option value="cheatsheet">Cheat Sheet</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="file" class="input-field" id="resource-file-input"
+                            accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png,.gif,.webp,.txt,.zip,.rar">
+                        <div style="font-size:0.75rem; color:#6a6a8a; margin-top:4px;">
+                            Max 10 MB • PDF, DOC, XLS, PPT, Images, TXT, ZIP
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:8px;">
+                        <button class="btn btn-primary btn-sm" onclick="uploadResource()"
+                            id="upload-btn">Upload</button>
+                        <button class="btn btn-secondary btn-sm" onclick="toggleUploadForm()">Cancel</button>
+                    </div>
+                </div>
+
+                <!-- Resource List -->
+                <div class="task-list" id="resource-list" style="margin-top:16px;">
+                    <div style="text-align:center; color:#6a6a8a; padding:40px;">
+                        No resources yet. Be the first to share! 📄
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

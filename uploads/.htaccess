@@ -1,0 +1,7 @@
+# Prevent PHP execution in uploads directory
+php_flag engine off
+
+# Deny access to potentially dangerous file types
+<FilesMatch "\.(php|phtml|php3|php4|php5|phps)$">
+    Deny from all
+</FilesMatch>

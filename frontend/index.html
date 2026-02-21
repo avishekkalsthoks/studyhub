@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="StudyHub - Your collaborative study platform. Manage tasks, chat with peers, and share resources.">
+    <title>StudyHub – Collaborative Study Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-logo">
+            <div class="nav-logo-icon">📚</div>
+            <span>StudyHub</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="login.html" class="btn btn-secondary btn-sm">Log In</a></li>
+            <li><a href="login.html#signup" class="btn btn-primary btn-sm">Get Started</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                ✨ Collaborative Study Platform
+            </div>
+            <h1>
+                Study Smarter,<br>
+                Not <span class="highlight">Harder</span>
+            </h1>
+            <p>
+                Your all-in-one study companion with group chat, task management,
+                shared resources, and Pomodoro timer — all designed to help you succeed.
+            </p>
+            <div class="hero-buttons">
+                <a href="login.html#signup" class="btn btn-primary" id="hero-cta">
+                    🚀 Start Studying Free
+                </a>
+                <a href="#features" class="btn btn-secondary" id="hero-features">
+                    Explore Features →
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-number">5+</div>
+                    <div class="hero-stat-label">Study Tools</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">📁</div>
+                    <div class="hero-stat-label">Share Resources</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">24/7</div>
+                    <div class="hero-stat-label">Available</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <h2>Everything You Need to <span class="highlight">Excel</span></h2>
+            <p>Powerful tools designed to boost your productivity and make studying enjoyable.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card" id="feature-chat">
+                <div class="feature-icon purple">💬</div>
+                <h3>Study Chat</h3>
+                <p>Collaborate with classmates in real-time chat rooms. Discuss topics, share ideas, and study together.</p>
+            </div>
+            <div class="feature-card" id="feature-tasks">
+                <div class="feature-icon pink">✅</div>
+                <h3>Task Manager</h3>
+                <p>Organize assignments with priorities and deadlines. Never miss a due date again with smart tracking.</p>
+            </div>
+            <div class="feature-card" id="feature-pomodoro">
+                <div class="feature-icon green">⏱️</div>
+                <h3>Pomodoro Timer</h3>
+                <p>Stay focused with the proven Pomodoro technique. Track your study sessions and build consistency.</p>
+            </div>
+            <div class="feature-card" id="feature-resources">
+                <div class="feature-icon orange">📁</div>
+                <h3>Shared Resources</h3>
+                <p>Upload and share study materials with everyone. PDFs, notes, presentations — all in one place.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="features" id="about">
+        <div class="section-header">
+            <h2>How <span class="highlight">StudyHub</span> Works</h2>
+            <p>Three simple steps to supercharge your studying.</p>
+        </div>
+        <div class="features-grid" style="max-width: 900px;">
+            <div class="feature-card" id="step-1">
+                <div class="feature-icon purple">1️⃣</div>
+                <h3>Create Your Account</h3>
+                <p>Sign up in seconds and access your personalized dashboard with all study tools ready to go.</p>
+            </div>
+            <div class="feature-card" id="step-2">
+                <div class="feature-icon pink">2️⃣</div>
+                <h3>Organize Your Tasks</h3>
+                <p>Add your assignments, set priorities and deadlines. Stay on top of everything with the task manager.</p>
+            </div>
+            <div class="feature-card" id="step-3">
+                <div class="feature-icon green">3️⃣</div>
+                <h3>Study Smarter</h3>
+                <p>Use all the tools — chat, tasks, timer, resources — everything working together for your success.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 StudyHub. Built for students, by students. 📚</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        // Smooth scroll for anchor links
+        $('a[href^="#"]').on('click', function(e) {
+            e.preventDefault();
+            var target = $($(this).attr('href'));
+            if (target.length) target[0].scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Navbar background on scroll
+        $(window).on('scroll', function() {
+            if ($(window).scrollTop() > 50) {
+                $('#navbar').css('background', 'rgba(10, 10, 26, 0.95)');
+            } else {
+                $('#navbar').css('background', 'rgba(10, 10, 26, 0.8)');
+            }
+        });
+
+        // Redirect if already logged in
+        if (localStorage.getItem('studyhub_token')) {
+            $('.nav-links').html(
+                '<li><a href="#features">Features</a></li>' +
+                '<li><a href="dashboard.html" class="btn btn-primary btn-sm">📊 Dashboard</a></li>'
+            );
+        }
+    </script>
+</body>
+</html>
