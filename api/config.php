@@ -18,8 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 // --- Database Settings ---
 define('DB_HOST', 'localhost');
-define('DB_USER', 'studyhub_user');
-define('DB_PASS', 'studyhub_pass');
+define('DB_USER', 'root');
+define('DB_PASS', '');
 define('DB_NAME', 'studyhub');
 
 // --- JWT Secret ---
@@ -89,8 +89,25 @@ function jwt_decode($token) {
 // Get Current User from Authorization header
 // ==========================================
 function get_current_user_from_token() {
-    $headers = getallheaders();
-    $auth = isset($headers["Authorization"]) ? $headers["Authorization"] : "";
+    // Get Authorization header (handles Apache stripping it)
+    $auth = "";
+    if (function_exists('getallheaders')) {
+        $headers = getallheaders();
+        // Case-insensitive lookup (some servers change case)
+        foreach ($headers as $key => $value) {
+            if (strtolower($key) === 'authorization') {
+                $auth = $value;
+                break;
+            }
+        }
+    }
+    // Fallback: Apache sometimes puts it in HTTP_AUTHORIZATION or REDIRECT_HTTP_AUTHORIZATION
+    if (!$auth && isset($_SERVER['HTTP_AUTHORIZATION'])) {
+        $auth = $_SERVER['HTTP_AUTHORIZATION'];
+    }
+    if (!$auth && isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])) {
+        $auth = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
+    }
 
     if (strpos($auth, "Bearer ") !== 0) {
         http_response_code(401);

@@ -312,7 +312,7 @@ function loadMessages() {
         // if there are no messages, show a welcome message
         if (messages.length === 0) {
             var welcomeHtml = '<div style="text-align:center; color:#6a6a8a; padding:40px;">';
-            welcomeHtml = welcomeHtml + 'Welcome to #' + currentRoom + '! Start chatting 🎉';
+            welcomeHtml = welcomeHtml + 'Welcome to #' + currentRoom + '! Start chatting.';
             welcomeHtml = welcomeHtml + '</div>';
             messagesContainer.html(welcomeHtml);
             return;
@@ -430,7 +430,7 @@ function showTasks() {
     // if there are no tasks to show
     if (tasksToShow.length === 0) {
         var emptyMessage = '<div style="text-align:center; color:#6a6a8a; padding:40px;">';
-        emptyMessage = emptyMessage + 'No tasks yet! Click "+ Add Task" 📝';
+        emptyMessage = emptyMessage + 'No tasks yet! Click "+ Add Task"';
         emptyMessage = emptyMessage + '</div>';
         taskListContainer.html(emptyMessage);
         return;
@@ -484,13 +484,13 @@ function showTasks() {
 
         // add due date if it exists
         if (task.due_date) {
-            html = html + '      <span>📅 ' + formatDate(task.due_date) + '</span>';
+            html = html + '      <span>Due: ' + formatDate(task.due_date) + '</span>';
         }
 
         html = html + '      <span class="badge ' + priorityBadgeColor + '">' + task.priority + '</span>';
         html = html + '    </div>';
         html = html + '  </div>';
-        html = html + '  <button class="btn btn-secondary btn-icon btn-sm" onclick="deleteTask(' + task.id + ')">🗑️</button>';
+        html = html + '  <button class="btn btn-secondary btn-icon btn-sm" onclick="deleteTask(' + task.id + ')">Del</button>';
         html = html + '</div>';
 
         i = i + 1;
@@ -623,12 +623,12 @@ function togglePomodoro() {
         // PAUSE the timer
         clearInterval(timerInterval);
         isRunning = false;
-        $('#pomo-toggle-btn').text('▶ Resume');
+        $('#pomo-toggle-btn').text('Resume');
         $('#pomo-circle').removeClass('running');
     } else {
         // START the timer
         isRunning = true;
-        $('#pomo-toggle-btn').text('⏸ Pause');
+        $('#pomo-toggle-btn').text('Pause');
         $('#pomo-circle').addClass('running');
 
         timerInterval = setInterval(function () {
@@ -643,7 +643,7 @@ function togglePomodoro() {
                 // stop the timer
                 clearInterval(timerInterval);
                 isRunning = false;
-                $('#pomo-toggle-btn').text('▶ Start');
+                $('#pomo-toggle-btn').text('Start');
                 $('#pomo-circle').removeClass('running');
 
                 // save the session to the server
@@ -657,9 +657,9 @@ function togglePomodoro() {
 
                 // show an alert to the user
                 if (timerType === 'work') {
-                    alert('🎉 Focus session complete!');
+                    alert('Focus session complete!');
                 } else {
-                    alert('☕ Break session complete!');
+                    alert('Break is over!');
                 }
 
                 // switch to the next mode
@@ -690,7 +690,7 @@ function resetPomodoro() {
     updateTimerDisplay();
 
     // reset the button text
-    $('#pomo-toggle-btn').text('▶ Start');
+    $('#pomo-toggle-btn').text('Start');
 
     // remove the running animation
     $('#pomo-circle').removeClass('running');
@@ -765,7 +765,7 @@ function loadCommonTasks() {
         var tasks = data.tasks || [];
 
         if (tasks.length === 0) {
-            commonList.html('<div style="text-align:center; color:#6a6a8a; padding:40px;">No common tasks yet. Be the first to post! 📢</div>');
+            commonList.html('<div style="text-align:center; color:#6a6a8a; padding:40px;">No common tasks yet. Be the first to post!</div>');
             return;
         }
 
@@ -784,7 +784,7 @@ function loadCommonTasks() {
             html = html + '  <div class="task-info" style="flex:1;">';
             html = html + '    <div class="task-title">' + escapeHtml(task.title) + '</div>';
             html = html + '    <div class="task-meta">';
-            if (task.due_date) html = html + '<span>📅 ' + formatDate(task.due_date) + '</span>';
+            if (task.due_date) html = html + '<span>Due: ' + formatDate(task.due_date) + '</span>';
             html = html + '      <span class="badge ' + priorityBadge + '">' + task.priority + '</span>';
             html = html + '      <span style="color:#6a6a8a;">by <strong>' + escapeHtml(task.username) + '</strong></span>';
             html = html + '    </div>';
@@ -794,7 +794,7 @@ function loadCommonTasks() {
             html = html + '  </div>';
 
             if (isOwner) {
-                html = html + '  <button class="btn btn-secondary btn-icon btn-sm" onclick="deleteCommonTask(' + task.id + ')">🗑️</button>';
+                html = html + '  <button class="btn btn-secondary btn-icon btn-sm" onclick="deleteCommonTask(' + task.id + ')">Del</button>';
             }
 
             html = html + '</div>';
@@ -939,7 +939,7 @@ function loadResources() {
         // if there are no resources, show empty message
         if (resources.length === 0) {
             var emptyHtml = '<div style="text-align:center; color:#6a6a8a; padding:40px;">';
-            emptyHtml = emptyHtml + 'No resources yet. Be the first to share! 📄';
+            emptyHtml = emptyHtml + 'No resources yet. Be the first to share!';
             emptyHtml = emptyHtml + '</div>';
             resourceContainer.html(emptyHtml);
             return;
@@ -952,27 +952,27 @@ function loadResources() {
             var resource = resources[i];
 
             // pick an icon based on file type
-            var fileIcon = '📎'; // default icon
+            var fileIcon = '[file]'; // default icon
             if (resource.file_type === 'application/pdf') {
-                fileIcon = '📄';
+                fileIcon = '[pdf]';
             }
             if (resource.file_type === 'image/jpeg' || resource.file_type === 'image/png' || resource.file_type === 'image/gif' || resource.file_type === 'image/webp') {
-                fileIcon = '🖼️';
+                fileIcon = '[img]';
             }
             if (resource.file_type === 'application/msword' || resource.file_type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
-                fileIcon = '📝';
+                fileIcon = '[doc]';
             }
             if (resource.file_type === 'application/vnd.ms-excel' || resource.file_type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
-                fileIcon = '📊';
+                fileIcon = '[xls]';
             }
             if (resource.file_type === 'application/vnd.ms-powerpoint' || resource.file_type === 'application/vnd.openxmlformats-officedocument.presentationml.presentation') {
-                fileIcon = '📽️';
+                fileIcon = '[ppt]';
             }
             if (resource.file_type === 'text/plain') {
-                fileIcon = '📃';
+                fileIcon = '[txt]';
             }
             if (resource.file_type === 'application/zip' || resource.file_type === 'application/x-rar-compressed') {
-                fileIcon = '🗜️';
+                fileIcon = '[zip]';
             }
 
             // pick a badge color based on category
@@ -1009,11 +1009,11 @@ function loadResources() {
             html = html + '    </div>';
             html = html + '  </div>';
             html = html + '  <div style="display:flex; gap:6px;">';
-            html = html + '    <a href="../' + resource.file_path + '" target="_blank" class="btn btn-primary btn-sm" style="text-decoration:none;">⬇ Download</a>';
+            html = html + '    <a href="../' + resource.file_path + '" target="_blank" class="btn btn-primary btn-sm" style="text-decoration:none;">Download</a>';
 
             // only show delete button if the current user uploaded this
             if (isOwner) {
-                html = html + '    <button class="btn btn-secondary btn-icon btn-sm" onclick="deleteResource(' + resource.id + ')">🗑️</button>';
+                html = html + '    <button class="btn btn-secondary btn-icon btn-sm" onclick="deleteResource(' + resource.id + ')">Del</button>';
             }
 
             html = html + '  </div>';

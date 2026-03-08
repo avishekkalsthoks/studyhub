@@ -3,6 +3,3 @@ RewriteEngine On
 # Pass Authorization header to PHP (Apache/XAMPP strips it by default)
 RewriteCond %{HTTP:Authorization} .+
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-
-# Redirect root to frontend
-RewriteRule ^$ frontend/ [R=302,L]

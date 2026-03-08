@@ -8,7 +8,7 @@
     <title>StudyHub – Login</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%236C63FF'/><text x='50' y='62' font-size='48' fill='white' text-anchor='middle' font-weight='bold'>SH</text></svg>">
 </head>
 
 <body>
@@ -16,7 +16,7 @@
     <!-- Navigation -->
     <nav class="navbar">
         <a href="index.html" class="nav-logo">
-            <div class="nav-logo-icon">📚</div>
+            <div class="nav-logo-icon">SH</div>
             <span>StudyHub</span>
         </a>
         <ul class="nav-links">
@@ -75,7 +75,7 @@
                         required>
                 </div>
                 <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px;" id="signup-btn">
-                    Create Account 🚀
+                    Create Account
                 </button>
             </form>
 
@@ -202,7 +202,7 @@
                     showError(resp.error || 'Signup failed');
                 },
                 complete: function () {
-                    $btn.html('Create Account 🚀').prop('disabled', false);
+                    $btn.html('Create Account').prop('disabled', false);
                 }
             });
         }

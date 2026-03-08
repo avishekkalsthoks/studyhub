@@ -8,7 +8,7 @@
     <title>StudyHub – Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%236C63FF'/><text x='50' y='62' font-size='48' fill='white' text-anchor='middle' font-weight='bold'>SH</text></svg>">
 </head>
 
 <body>
@@ -17,26 +17,26 @@
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-logo">
-                <div class="nav-logo-icon">📚</div>
+                <div class="nav-logo-icon">SH</div>
                 <span>StudyHub</span>
             </div>
 
             <div class="sidebar-section">
                 <div class="sidebar-section-title">Main</div>
                 <div class="sidebar-item active" onclick="switchPanel('chat')" id="nav-chat">
-                    <span class="icon">💬</span>
+                    <span class="icon">&gt;</span>
                     <span>Study Chat</span>
                 </div>
                 <div class="sidebar-item" onclick="switchPanel('tasks')" id="nav-tasks">
-                    <span class="icon">✅</span>
+                    <span class="icon">&bull;</span>
                     <span>Task Manager</span>
                 </div>
                 <div class="sidebar-item" onclick="switchPanel('common')" id="nav-common">
-                    <span class="icon">📢</span>
+                    <span class="icon">#</span>
                     <span>Common Tasks</span>
                 </div>
                 <div class="sidebar-item" onclick="switchPanel('pomodoro')" id="nav-pomodoro">
-                    <span class="icon">⏱️</span>
+                    <span class="icon">~</span>
                     <span>Pomodoro</span>
                 </div>
             </div>
@@ -44,7 +44,7 @@
             <div class="sidebar-section">
                 <div class="sidebar-section-title">Community</div>
                 <div class="sidebar-item" onclick="switchPanel('resources')" id="nav-resources">
-                    <span class="icon">📁</span>
+                    <span class="icon">/</span>
                     <span>Resources</span>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                     <div class="sidebar-user-email" id="user-display-email">...</div>
                 </div>
                 <button class="btn-icon btn-secondary" onclick="logout()" title="Log out"
-                    style="font-size:0.8rem;">🚪</button>
+                    style="font-size:0.8rem;">Exit</button>
             </div>
         </aside>
 
@@ -66,7 +66,7 @@
             <!-- ========== Study Chat Panel ========== -->
             <div class="panel active" id="panel-chat">
                 <div class="panel-header">
-                    <h2>💬 Study Chat</h2>
+                    <h2>Study Chat</h2>
                     <span class="badge badge-primary" id="chat-room-label"># general</span>
                 </div>
                 <div class="chat-room-bar">
@@ -79,7 +79,7 @@
                 <div class="chat-container">
                     <div class="chat-messages" id="chat-messages">
                         <div style="text-align:center; color:#6a6a8a; padding:40px; font-size:0.9rem;">
-                            Welcome to <strong>#general</strong>! Start the conversation 🎉
+                            Welcome to <strong>#general</strong>! Start the conversation.
                         </div>
                     </div>
                     <div class="chat-input-area">
@@ -93,7 +93,7 @@
             <!-- ========== Task Manager Panel ========== -->
             <div class="panel" id="panel-tasks">
                 <div class="panel-header">
-                    <h2>✅ Task Manager</h2>
+                    <h2>Task Manager</h2>
                     <button class="btn btn-primary btn-sm" onclick="toggleAddTask()" id="add-task-toggle">+ Add
                         Task</button>
                 </div>
@@ -140,7 +140,7 @@
                 <!-- Task List -->
                 <div class="task-list" id="task-list">
                     <div style="text-align:center; color:#6a6a8a; padding:40px;">
-                        No tasks yet. Click "+ Add Task" to get started! 📝
+                        No tasks yet. Click "+ Add Task" to get started!
                     </div>
                 </div>
             </div>
@@ -148,7 +148,7 @@
             <!-- ========== Common Tasks Panel ========== -->
             <div class="panel" id="panel-common">
                 <div class="panel-header">
-                    <h2>📢 Common Tasks</h2>
+                    <h2>Common Tasks</h2>
                     <button class="btn btn-primary btn-sm" onclick="toggleAddCommonTask()" id="add-common-toggle">+ Add
                         Shared Task</button>
                 </div>
@@ -187,7 +187,7 @@
                 <!-- Common Task List -->
                 <div class="task-list" id="common-task-list">
                     <div style="text-align:center; color:#6a6a8a; padding:40px;">
-                        No common tasks yet. Be the first to post! 📢
+                        No common tasks yet. Be the first to post!
                     </div>
                 </div>
             </div>
@@ -195,7 +195,7 @@
             <!-- ========== Pomodoro Timer Panel ========== -->
             <div class="panel" id="panel-pomodoro">
                 <div class="panel-header">
-                    <h2>⏱️ Pomodoro Timer</h2>
+                    <h2>Pomodoro Timer</h2>
                 </div>
 
                 <div class="pomodoro-container">
@@ -213,8 +213,8 @@
                     </div>
 
                     <div class="pomodoro-controls">
-                        <button class="btn btn-primary" onclick="togglePomodoro()" id="pomo-toggle-btn">▶ Start</button>
-                        <button class="btn btn-secondary" onclick="resetPomodoro()">↺ Reset</button>
+                        <button class="btn btn-primary" onclick="togglePomodoro()" id="pomo-toggle-btn">Start</button>
+                        <button class="btn btn-secondary" onclick="resetPomodoro()">Reset</button>
                     </div>
 
                     <div class="pomodoro-stats">
@@ -237,7 +237,7 @@
             <!-- ========== Resources Panel ========== -->
             <div class="panel" id="panel-resources">
                 <div class="panel-header">
-                    <h2>📁 Shared Resources</h2>
+                    <h2>Shared Resources</h2>
                     <button class="btn btn-primary btn-sm" onclick="toggleUploadForm()" id="upload-toggle-btn">+ Upload
                         Resource</button>
                 </div>
@@ -277,7 +277,7 @@
                 <!-- Resource List -->
                 <div class="task-list" id="resource-list" style="margin-top:16px;">
                     <div style="text-align:center; color:#6a6a8a; padding:40px;">
-                        No resources yet. Be the first to share! 📄
+                        No resources yet. Be the first to share!
                     </div>
                 </div>
             </div>
